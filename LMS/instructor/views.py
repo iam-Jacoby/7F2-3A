@@ -8,8 +8,6 @@ def instructor_dashboard(request):
     request.session["userid"] = 100
 
     userid = request.session.get("userid")
-    print(userid)
-
 
     context = {
         'userid' : userid,
