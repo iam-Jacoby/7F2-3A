@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, SignInForm
+from django.http import HttpResponse  # Added from friend's code
 
 def home_view(request):
     context = {}
@@ -37,3 +38,7 @@ def signin_view(request):
 def logout_view(request):
     logout(request)
     return redirect('signin')
+
+# Temporary view from your friend's code
+def temporary(request):
+    return HttpResponse("Hello world!")
