@@ -11,3 +11,4 @@ class User(models.Model):
     email = models.EmailField(max_length=254)
     name = models.CharField(max_length=60)
     user_type = models.CharField(max_length=2, choices=account_type)
+
