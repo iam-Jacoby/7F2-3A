@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Own
-    'rest_framework',
+    # 'rest_framework',
 
     # Own App
     'homeapp',
