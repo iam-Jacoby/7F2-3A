@@ -5,7 +5,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 
 
-def login(request):
+def loginView(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
         if form.is_valid():
@@ -13,8 +13,8 @@ def login(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                alogin(request, user)
-                # login(request, user)
+                # alogin(request, user)
+                login(request, user)
                 return redirect('home')
             else:
                 form.add_error(None, 'Invalid username or password')
@@ -38,4 +38,11 @@ def register(request):
 
 
 def home(request):
-    return HttpResponse("Hello world!")
+    if request.user.is_authenticated:
+        user_info = {
+            'username': request.user.username,
+            'email': request.user.email,
+        }
+        return render(request, 'home.html', {'user_info': user_info})
+    else:
+        return HttpResponse("You are not logged in.")
