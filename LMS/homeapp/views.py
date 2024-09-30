@@ -1,14 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 
-from django.contrib.auth.decorators import login_required
-
-@login_required(login_url="login/")
-def defaultView(request):
-    return redirect('home')
 
 def logoutView(request):
     logout(request)
@@ -44,7 +40,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
 
-
+@login_required(login_url="login/")
 def home(request):
     if request.user.is_authenticated:
         user_info = {
