@@ -4,6 +4,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url="login/")
+def defaultView(request):
+    return redirect('home')
+
 def logoutView(request):
     logout(request)
     return redirect('login')
