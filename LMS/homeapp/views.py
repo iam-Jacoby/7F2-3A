@@ -1,8 +1,27 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, alogin
 from django.http import HttpResponse
-
-from .forms import UserRegisterForm
 from django.contrib import messages
+from .forms import UserRegisterForm, UserLoginForm
+
+
+def login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                alogin(request, user)
+                # login(request, user)
+                return redirect('home')
+            else:
+                form.add_error(None, 'Invalid username or password')
+    else:
+        form = UserLoginForm()
+    
+    return render(request, 'login.html', {'form': form})
 
 
 def register(request):
