@@ -1,0 +1,7 @@
+username            password                email
+
+Nick                Nick1234                Nick@nick.com
+
+ASUS                W!WL-p3_f%'Z%q4         ASUS@gmail.com
+
+Valentine           Jk$^2j;@2uCq}~z
