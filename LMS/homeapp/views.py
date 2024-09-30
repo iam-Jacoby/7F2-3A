@@ -19,7 +19,7 @@ def loginView(request):
                 login(request, user)
                 return redirect('home')
             else:
-                form.add_error(None, 'Invalid username or password')
+                messages.add_message(request, messages.ERROR, "Invalid username or password")
     else:
         form = UserLoginForm()
     
