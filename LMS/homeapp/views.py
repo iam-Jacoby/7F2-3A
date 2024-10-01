@@ -5,6 +5,10 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 
+def userSplitterView(request):
+    user_id = request.user.id
+    print(user_id)
+    return redirect('instructor_dashboard')
 
 def logoutView(request):
     logout(request)
