@@ -1,14 +1,22 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
+from .models import User_types
 
 def userSplitterView(request):
     user_id = request.user.id
-    print(user_id)
-    return redirect('instructor_dashboard')
+    user_type = get_object_or_404(User_types, user_id=user_id)
+    if user_type.user_type ==  'STU':
+        return redirect('instructor_dashboard')
+    elif user_type.user_type ==  'INS':
+        return redirect('home')
+    elif user_type.user_type ==  'ADM':
+        return redirect('home')
+    else:
+        return HttpResponse("Error user_type={user_type}, user_type.user_type={user_type.user_type}")
 
 def logoutView(request):
     logout(request)
