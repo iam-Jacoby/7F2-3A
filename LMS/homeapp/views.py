@@ -6,7 +6,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 from .models import User_types
 
-@login_required(login_url="login/")
+@login_required(login_url="/login/")
 def userSplitterView(request):
     user_id = request.user.id
     user_type = User_types.objects.get(user_id=user_id)
@@ -19,7 +19,7 @@ def userSplitterView(request):
     else:
         return HttpResponse("Error user_type={user_type}, user_type.user_type={user_type.user_type}")
 
-@login_required(login_url="login/")
+@login_required(login_url="/login/")
 def logoutView(request):
     logout(request)
     return redirect('login')
@@ -53,7 +53,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
 
-@login_required(login_url="login/")
+@login_required(login_url="/login/")
 def home(request):
     if request.user.is_authenticated:
         user_info = {
