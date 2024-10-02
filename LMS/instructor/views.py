@@ -1,20 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from homeapp.models import User
+from django.contrib.auth.models import User
 
 def instructor_dashboard(request):
-    template = loader.get_template('dashboard.html')
+    if request.user.is_authenticated:
+        template = loader.get_template('dashboard.html')
 
-    request.session["userid"] = 1
+        # user = User.objects.get(username=request.user.username)
 
-    userid = request.session.get("userid")
+        context = {
+            'username' : request.user.username,
+        }
 
-    user_details = User.objects.get(user_id=userid)
-
-    context = {
-        'userid' : userid,
-        "user_details" : user_details,
-    }
-
-    return HttpResponse(template.render(context, request))
+        return HttpResponse(template.render(context, request))
+    else:
+        return HttpResponse("You are not logged in.")
