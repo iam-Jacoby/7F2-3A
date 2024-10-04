@@ -13,7 +13,7 @@ def userSplitterView(request):
     if user_type.user_type ==  'INS':
         return redirect('instructor_dashboard')
     elif user_type.user_type ==  'STU':
-        return redirect('home')
+        return redirect('student_dashboard')
     elif user_type.user_type ==  'ADM':
         return redirect('home')
     else:
